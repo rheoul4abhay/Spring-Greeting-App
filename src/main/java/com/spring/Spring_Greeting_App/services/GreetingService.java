@@ -55,4 +55,24 @@ public class GreetingService {
         return null; //if id is not found in db
     }
 
+    //Delete greeting by id (D)
+    public boolean deleteGreetingById(Long id){
+        Optional<Greeting> existingGreeting = greetingRepository.findById(id);
+
+        if(existingGreeting.isPresent()){
+            greetingRepository.deleteById(id);
+            return true;
+        }
+        return false; //if id is not found in db
+    }
+
+    //Optional feature - Delete all greeting messages from db
+    public boolean deleteAllGreetings() {
+        if(greetingRepository.count() > 0) {
+            greetingRepository.deleteAll();
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -41,4 +41,20 @@ public class GreetingController {
         Greeting updatedGreeting = greetingService.updateGreetingById(id, message);
         return updatedGreeting != null ? new ResponseEntity<>(updatedGreeting, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteGreetingById(@PathVariable Long id){
+        boolean isDeleted = greetingService.deleteGreetingById(id);
+        return isDeleted ?
+                new ResponseEntity<>("Greeting deleted successfully!", HttpStatus.OK) :
+                new ResponseEntity<>("Greeting not found", HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/delete/all")
+    public ResponseEntity<String> deleteAllGreetings() {
+        boolean deletedSuccessfully = greetingService.deleteAllGreetings();
+        return deletedSuccessfully ?
+                new ResponseEntity<>("All greetings deleted successfully!", HttpStatus.OK) :
+                new ResponseEntity<>("No greeting messages found to delete", HttpStatus.NO_CONTENT);
+    }
 }
