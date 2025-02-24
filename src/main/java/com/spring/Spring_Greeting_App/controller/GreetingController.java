@@ -14,9 +14,10 @@ public class GreetingController {
     @Autowired
     private GreetingService greetingService;
 
-    @GetMapping("/get")
-    public ResponseEntity<Greeting> getGreeting() {
-        return new ResponseEntity<>(greetingService.getGreeting(), HttpStatus.OK);
+    @GetMapping("/personalized")
+    public ResponseEntity<Greeting> getPersonalizedGreeting(@RequestParam(required = false) String firstName,
+                                                            @RequestParam(required = false) String lastName){
+        return new ResponseEntity<>(greetingService.getPersonalizedGreeting(firstName, lastName), HttpStatus.OK);
     }
 
 }
