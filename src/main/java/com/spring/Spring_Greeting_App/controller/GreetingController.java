@@ -14,10 +14,10 @@ public class GreetingController {
     @Autowired
     private GreetingService greetingService;
 
-    @GetMapping("/personalized")
-    public ResponseEntity<Greeting> getPersonalizedGreeting(@RequestParam(required = false) String firstName,
-                                                            @RequestParam(required = false) String lastName){
-        return new ResponseEntity<>(greetingService.getPersonalizedGreeting(firstName, lastName), HttpStatus.OK);
+    @PostMapping("/save")
+    public ResponseEntity<Greeting> saveGreeting(@RequestParam(required = false) String firstName,
+                                                 @RequestParam(required = false) String lastName){
+        return new ResponseEntity<>(greetingService.saveGreeting(firstName, lastName), HttpStatus.CREATED);
     }
 
 }
