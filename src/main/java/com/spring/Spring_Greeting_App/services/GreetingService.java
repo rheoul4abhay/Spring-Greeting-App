@@ -43,4 +43,16 @@ public class GreetingService {
         return greetingRepository.findAll(); //fetch all greetings from db
     }
 
+    //Update greeting message (U)
+    public Greeting updateGreetingById(Long id, String newMessage){
+        Optional<Greeting> existingGreeting = greetingRepository.findById(id);
+
+        if(existingGreeting.isPresent()){
+            Greeting greeting = existingGreeting.get();
+            greeting.setMessage(newMessage); //update message
+            return greetingRepository.save(greeting); //save updated greeting
+        }
+        return null; //if id is not found in db
+    }
+
 }

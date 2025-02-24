@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional; //to deal with non-existing id requests in database
 
 @RestController
 @RequestMapping("/greet")
@@ -35,4 +35,10 @@ public class GreetingController {
         return new ResponseEntity<>(greetings, HttpStatus.OK);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Greeting> updateGreeting(@PathVariable Long id,
+                                                   @RequestParam String message) {
+        Greeting updatedGreeting = greetingService.updateGreetingById(id, message);
+        return updatedGreeting != null ? new ResponseEntity<>(updatedGreeting, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
