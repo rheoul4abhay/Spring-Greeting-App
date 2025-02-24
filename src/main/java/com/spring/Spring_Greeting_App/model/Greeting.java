@@ -19,6 +19,11 @@ public class Greeting {
         this.message = message;
     }
 
+    //getters and setters
+    public Long getId(){
+        return id;
+    }
+
     public String getMessage(){
         return message;
     }
