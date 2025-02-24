@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,6 +27,12 @@ public class GreetingController {
     public ResponseEntity<Greeting> getGreetingById(@PathVariable Long id){
         Optional<Greeting> greeting = greetingService.getGreetingById(id);
         return greeting.map(value -> new ResponseEntity<Greeting>(value, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Greeting>> getAllGreetings(){
+        List<Greeting> greetings = greetingService.getAllGreetings();
+        return new ResponseEntity<>(greetings, HttpStatus.OK);
     }
 
 }
